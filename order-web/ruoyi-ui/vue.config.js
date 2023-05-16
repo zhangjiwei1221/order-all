@@ -30,16 +30,6 @@ module.exports = {
     host: '0.0.0.0',
     port: port,
     open: true,
-    proxy: {
-      // detail: https://cli.vuejs.org/config/#devserver-proxy
-      [process.env.VUE_APP_BASE_API]: {
-        target: `http://localhost:8080`,
-        changeOrigin: true,
-        pathRewrite: {
-          ['^' + process.env.VUE_APP_BASE_API]: ''
-        }
-      }
-    },
     disableHostCheck: true
   },
   configureWebpack: {
@@ -106,11 +96,6 @@ module.exports = {
               }
             }
           })
-          config.optimization.runtimeChunk('single'),
-            {
-              from: path.resolve(__dirname, './public/robots.txt'), //防爬虫文件
-              to: './' //到根目录下
-            }
         }
       )
   }
