@@ -1,6 +1,6 @@
 /**
  * v-hasPermi 操作权限处理
- * Copyright (c) 2019 ruoyi
+ * © 2023 苏州苏豫供应链服务有限公司
  */
 
 import store from '@/store'

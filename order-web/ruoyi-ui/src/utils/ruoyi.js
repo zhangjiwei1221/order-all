@@ -1,6 +1,6 @@
 /**
  * 通用js方法封装处理
- * Copyright (c) 2019 ruoyi
+ * © 2023 苏州苏豫供应链服务有限公司
  */
 
 const baseURL = process.env.VUE_APP_BASE_API

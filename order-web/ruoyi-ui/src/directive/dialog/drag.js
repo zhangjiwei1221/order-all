@@ -1,6 +1,6 @@
 /**
  * v-dialogDrag 弹窗拖拽
- * Copyright (c) 2019 ruoyi
+ * © 2023 苏州苏豫供应链服务有限公司
  */
 
 export default {
