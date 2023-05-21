@@ -24,7 +24,7 @@ import java.util.List;
 public class OmsProductController extends BaseController {
 
     @Resource
-    private IOmsProductService omsProductService;
+    private IOmsProductService productService;
     
     @PostMapping("/list")
     public TableDataInfo list(OmsProductDTO omsProductDTO) {
@@ -38,23 +38,23 @@ public class OmsProductController extends BaseController {
         if (type != null) {
             wrapper = wrapper.eq(OmsProduct::getType, type);
         }
-        List<OmsProduct> list = omsProductService.list(wrapper);
+        List<OmsProduct> list = productService.list(wrapper);
         return getDataTable(list);
     }
     
     @GetMapping("/{id}")
     public AjaxResult getById(@PathVariable Long id) {
-        return AjaxResult.success(omsProductService.getById(id));
+        return AjaxResult.success(productService.getById(id));
     }
     
     @PostMapping("/save")
     public AjaxResult add(@RequestBody OmsProduct omsProduct) {
-        return toAjax(omsProductService.saveOrUpdate(omsProduct));
+        return toAjax(productService.saveOrUpdate(omsProduct));
     }
     
     @DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids) {
-        omsProductService.removeByIds(Arrays.asList(ids));
+        productService.removeByIds(Arrays.asList(ids));
         return success();
     }
     

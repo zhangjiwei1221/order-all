@@ -15,6 +15,15 @@ export function login(username, password, code, uuid) {
   })
 }
 
+// 查询订单详细
+export function getOrder(id) {
+  return request({
+    url: '/oms/order/' + id,
+    method: 'get'
+  })
+}
+
+
 //注册
 export function register(data) {
   return request({

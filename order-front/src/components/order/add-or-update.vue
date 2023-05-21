@@ -9,21 +9,21 @@
     />
     <van-form @submit="onSubmit">
       <van-field
-        v-model="name"
-        name="name"
+        v-model="shopName"
+        name="shopName"
         label="店名"
         placeholder="店名"
         :rules="[{ required: true, message: '请填写店名' }]"
       />
       <van-field
-        v-model="tel"
+        v-model="phone"
         type="tel"
         label="手机号"
         placeholder="手机号"
         :rules="[{ required: true, message: '请填写手机号' }]"
       />
       <van-field
-        v-model="message"
+        v-model="remark"
         rows="2"
         autosize
         label="备注"
@@ -40,14 +40,15 @@
 </template>
 
 <script>
-import {mapMutations} from 'vuex'
+import { mapMutations } from 'vuex'
+import { addOrder } from '@/api/order'
 
 export default {
   data() {
     return {
-      name: '',
-      tel: '',
-      message: ''
+      shopName: '',
+      phone: '',
+      remark: ''
     }
   },
   methods: {
@@ -58,12 +59,19 @@ export default {
       this.$router.push('/cart')
     },
     onSubmit() {
-      this.addOrder({
-        name: this.name,
-        tel: this.tel,
-        message: this.message,
-        time: new Date().toLocaleString('zh-CN')
-      })
+      const _ = this.$store.state
+      addOrder({
+        shopName: this.shopName,
+        phone: this.phone,
+        remark: this.remark,
+        createTime: new Date().toLocaleString('zh-CN'),
+        productList: JSON.stringify({
+          productList: _.productList,
+          cartNum: _.cartNum,
+          cacheVegetableList: _.cacheVegetableList,
+          cacheSoyList: _.cacheSoyList
+        })
+      }).then(() => this.addOrder())
       this.$router.push('/cart')
     }
   }

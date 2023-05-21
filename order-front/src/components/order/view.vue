@@ -41,7 +41,8 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
+import { mapState } from 'vuex'
+import { getOrder } from '@/api/login'
 
 export default {
   data() {
@@ -75,10 +76,11 @@ export default {
     })
   },
   mounted() {
-    this.orderInfo = this.cacheOrderList.filter(
-      item => item.time === this.$route.query.time
-    )[0]
-    this.productList = this.orderInfo.productList.productList
+    getOrder(this.$route.query.id).then(({ data }) => {
+      this.orderInfo = data
+      this.orderInfo.productList = JSON.parse(data.productList)
+      this.productList = this.orderInfo.productList.productList
+    })
   },
   methods: {
     onClickLeft() {
@@ -86,7 +88,7 @@ export default {
     },
     copyOrderInfo() {
       const _ = this.orderInfo
-      let result = `店  名：${_.name}\n手机号：${_.tel}\n备  注：${
+      let result = `店  名：${_.shopName}\n手机号：${_.phone}\n备  注：${
         _.message || '无'
       }\n--------------------------\n`
       for (const product of _.productList.productList) {

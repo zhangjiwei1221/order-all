@@ -11,8 +11,8 @@
     <van-list v-if="cacheOrderList.length">
       <van-cell v-for="(order, index) in cacheOrderList" :key="index">
         <van-row>
-          <van-col span="8">{{ order.name }}</van-col>
-          <van-col span="12">{{ order.time }}</van-col>
+          <van-col span="8">{{ order.shopName }}</van-col>
+          <van-col span="12">{{ order.createTime }}</van-col>
           <van-col span="4">
             <van-icon
               name="eye-o"
@@ -36,12 +36,19 @@
 </template>
 
 <script>
-import {mapState, mapMutations} from 'vuex'
+import { mapMutations } from 'vuex'
+import { listOrder } from '@/api/order'
 
 export default {
-  computed: {
-    ...mapState({
-      cacheOrderList: 'cacheOrderList'
+  data() {
+    return {
+      cacheOrderList: []
+    }
+  },
+  mounted() {
+    listOrder().then(({ rows }) => {
+      rows.forEach(item => item.productList = JSON.parse(item.productList))
+      this.cacheOrderList = rows
     })
   },
   methods: {
@@ -52,7 +59,7 @@ export default {
       this.$router.push({
         path: 'order-view',
         query: {
-          time: order.time
+          id: order.id
         }
       })
     },

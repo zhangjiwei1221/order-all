@@ -1,13 +1,13 @@
 package com.ruoyi.system.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.ruoyi.system.domain.OmsProduct;
+import com.ruoyi.system.domain.OmsOrder;
 
 /**
- * 产品 Mapper
+ * OmsOrderMapper
  *
  * @author zjw
  * @date 2023-05-21
  */
-public interface OmsProductMapper extends BaseMapper<OmsProduct> {
+public interface OmsOrderMapper extends BaseMapper<OmsOrder>  {
 }

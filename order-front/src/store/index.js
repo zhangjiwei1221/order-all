@@ -41,7 +41,7 @@ const store = new Vuex.Store({
           }
         }
       }
-      if (index != -1) {
+      if (index !== -1) {
         state.productList.splice(index, 1)
         state.cartNum -= 1
         if (id <= state.cacheVegetableList.length) {
@@ -86,19 +86,11 @@ const store = new Vuex.Store({
     changeCartNum(state, num) {
       state.cartNum += num
     },
-    addOrder(state, order) {
-      order.productList = {
-        productList: state.productList,
-        cartNum: state.cartNum,
-        cacheVegetableList: state.cacheVegetableList,
-        cacheSoyList: state.cacheSoyList
-      }
-      state.cacheOrderList.push(order)
+    addOrder(state) {
       state.productList = []
       state.cartNum = 0
       state.cacheVegetableList = []
       state.cacheSoyList = []
-      storage.setItem(`orderList${state.username}`, JSON.stringify(state.cacheOrderList))
     },
     editOrder(state, order) {
       const productList = order.productList

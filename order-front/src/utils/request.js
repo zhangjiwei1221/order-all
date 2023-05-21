@@ -1,5 +1,6 @@
 import axios from 'axios'
-import {getToken} from '@/utils/auth'
+import { getToken, removeToken } from '@/utils/auth'
+import router from '@/router'
 
 axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8'
 // 创建axios实例
@@ -46,6 +47,14 @@ service.interceptors.request.use(config => {
 })
 
 // 响应拦截器
-service.interceptors.response.use(res => res.data, Promise.reject)
+service.interceptors.response.use(res => {
+  const result = res.data
+  if (result.code === 401) {
+    removeToken()
+    router.push('/login')
+    return
+  }
+  return result
+}, Promise.reject)
 
 export default service
