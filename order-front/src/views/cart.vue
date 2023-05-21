@@ -15,7 +15,7 @@
             />
           </van-col>
         </van-row>
-        <van-divider />
+        <van-divider/>
       </van-cell>
     </van-sticky>
     <van-list v-if="productList.length">
@@ -28,9 +28,9 @@
           </van-col>
           <van-col span="6">
             <van-icon name="edit"
-              size="20"
-              color="#1989fa"
-              @click="editProduct(product, index)" />
+                      size="20"
+                      color="#1989fa"
+                      @click="editProduct(product, index)"/>
             <van-icon
               name="delete-o"
               size="20"
@@ -42,19 +42,19 @@
         </van-row>
       </van-cell>
     </van-list>
-    <van-empty v-else description="暂无数据" />
+    <van-empty v-else description="暂无数据"/>
     <van-submit-bar v-if="productList.length"
-      label="合计(件)："
-      currency=""
-      :decimal-length="0"
-      :price="cartNum * 100"
-      button-text="提交订单"
-      @submit="onSubmit" />
+                    label="合计(件)："
+                    currency=""
+                    :decimal-length="0"
+                    :price="cartNum * 100"
+                    button-text="提交订单"
+                    @submit="onSubmit"/>
   </div>
-</template> 
+</template>
 
 <script>
-import { mapState, mapMutations } from 'vuex'
+import {mapState, mapMutations} from 'vuex'
 
 export default {
   data() {
@@ -116,6 +116,7 @@ export default {
 ::v-deep .van-cell__value--alone {
   text-align: center;
 }
+
 ::v-deep .van-submit-bar {
   bottom: 55px;
 }

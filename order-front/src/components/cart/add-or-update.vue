@@ -32,7 +32,8 @@
       />
       <div style="margin: 16px">
         <van-button round block type="info" native-type="submit"
-          >提交</van-button
+        >提交
+        </van-button
         >
       </div>
     </van-form>
@@ -40,7 +41,7 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import {mapMutations} from 'vuex'
 
 export default {
   data() {

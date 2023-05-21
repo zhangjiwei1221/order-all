@@ -43,6 +43,11 @@ export const constantRoutes = [
     path: '/login',
     component: () => import('@/views/login'),
     name: '登录'
+  },
+  {
+    path: '/register',
+    component: () => import('@/views/register'),
+    name: '注册'
   }
 ]
 
@@ -50,14 +55,14 @@ const createRouter = () =>
   new Router({
     mode: 'history',
     base: process.env.VUE_APP_PUBLIC_PATH || '',
-    scrollBehavior: () => ({ y: 0 }),
+    scrollBehavior: () => ({y: 0}),
     routes: constantRoutes
   })
 
 const router = createRouter()
 
 export function resetRouter() {
-  const { matcher } = createRouter()
+  const {matcher} = createRouter()
   router.matcher = matcher
 }
 

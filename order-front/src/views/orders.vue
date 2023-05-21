@@ -5,7 +5,7 @@
         <van-row>
           <van-col span="24">已提交订单列表</van-col>
         </van-row>
-        <van-divider />
+        <van-divider/>
       </van-cell>
     </van-sticky>
     <van-list v-if="cacheOrderList.length">
@@ -31,12 +31,12 @@
         </van-row>
       </van-cell>
     </van-list>
-    <van-empty v-else description="暂无数据" />
+    <van-empty v-else description="暂无数据"/>
   </div>
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex'
+import {mapState, mapMutations} from 'vuex'
 
 export default {
   computed: {

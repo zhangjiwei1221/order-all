@@ -1,6 +1,6 @@
 <template>
   <div class="login-container">
-    <img class="logo" :src="require('../assets/logo.png')" alt="logo" />
+    <img class="logo" :src="require('../assets/logo.png')" alt="logo"/>
     <van-form ref="form" class="login-form">
       <van-cell-group>
         <van-field
@@ -26,14 +26,18 @@
       round
       block
       @click="handleLogin"
-      >登录</van-button
-    >
+    >登录
+    </van-button>
+    <div class="register"
+         @click="register">立即注册</div>
     <div class="copy-right">© 2023 苏州苏豫供应链服务有限公司</div>
   </div>
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import {mapMutations} from 'vuex'
+import {login} from '@/api/login'
+import {setToken} from '@/utils/auth'
 
 export default {
   data() {
@@ -50,13 +54,19 @@ export default {
     }),
     handleLogin() {
       this.$refs.form.validate().then(() => {
-        if (!this.form.username || this.form.password !== '123456') {
-          this.$toast.fail('用户名或密码错误')
-          return
-        }
-        this.setUsername(this.form.username)
-        this.$router.push('/home')
+        login(this.form.username, this.form.password).then(({token}) => {
+          if (!token) {
+            this.$toast.fail('用户名或密码错误')
+            return
+          }
+          setToken(token)
+          this.setUsername(this.form.username)
+          this.$router.push('/home')
+        })
       })
+    },
+    register() {
+      this.$router.push('/register')
     }
   }
 }
@@ -85,6 +95,14 @@ export default {
 .login-btn {
   width: 80%;
   margin-top: 20px;
+}
+
+.register {
+  cursor: pointer;
+  color: #1989fa;
+  font-size: 14px;
+  margin: 10px 15%;
+  align-self: flex-end;
 }
 
 .copy-right {

@@ -27,7 +27,7 @@
         </van-row>
       </van-cell>
     </van-list>
-    <van-empty v-else description="暂无数据" />
+    <van-empty v-else description="暂无数据"/>
     <van-button
       class="copy-btn"
       type="primary"
@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import {mapState} from 'vuex'
 
 export default {
   data() {
@@ -119,6 +119,7 @@ export default {
 ::v-deep .van-cell__value--alone {
   text-align: center;
 }
+
 ::v-deep .van-submit-bar {
   bottom: 55px;
 }
