@@ -88,15 +88,6 @@ token:
   # 令牌有效期（默认30分钟）
   expireTime: 30
 
-# MyBatis配置
-mybatis:
-  # 搜索指定包别名
-  typeAliasesPackage: com.ruoyi.**.domain
-  # 配置mapper的扫描，找到所有的mapper.xml映射文件
-  mapperLocations: classpath*:mapper/**/*Mapper.xml
-  # 加载全局的配置文件
-  configLocation: classpath:mybatis/mybatis-config.xml
-
 # PageHelper分页插件
 pagehelper:
   helperDialect: mysql
@@ -117,4 +108,12 @@ xss:
   # 排除链接（多个用逗号分隔）
   excludes: /system/notice
   # 匹配链接
-  urlPatterns: /system/*,/monitor/*,/tool/*
+  urlPatterns: /system/*
+
+mybatis-plus:
+  typeAliasesPackage: com.ruoyi.**.domain.**
+  mapperLocations: classpath*:mapper/**/*Mapper.xml
+  global-config:
+    banner: false
+  configuration:
+    map-underscore-to-camel-case: true
