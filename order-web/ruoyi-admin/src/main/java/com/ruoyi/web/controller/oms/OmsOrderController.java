@@ -87,7 +87,7 @@ public class OmsOrderController extends BaseController {
                 String unitKey = String.valueOf(product.get("unitKey"));
                 Map<String, Object> unitParams = (Map<String, Object>) unitMap.get(unitKey);
                 if (unitParams != null) {
-                    product.put("unit", unitParams.get(String.valueOf(product.get("unit"))));
+                    product.put("unit", unitParams.getOrDefault(String.valueOf(product.get("unit")), String.valueOf(product.get("unit"))));
                 }
             }
             excelWriter.fill(productList, fillConfig, writeSheet);
