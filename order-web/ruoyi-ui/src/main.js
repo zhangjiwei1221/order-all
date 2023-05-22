@@ -85,6 +85,10 @@ Vue.use(Element, {
   size: Cookies.get('size') || 'medium' // set element-ui default size
 })
 
+import Print from 'vue-iframe-print'
+
+Vue.use(Print)
+
 Vue.config.productionTip = false
 
 new Vue({

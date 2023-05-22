@@ -35,10 +35,36 @@ export function updateOrder(data) {
   })
 }
 
+// 导出订单
+export function exportOrder(id) {
+  return downloadFile('/oms/order/export/' + id)
+}
+
 // 删除订单
 export function delOrder(id) {
   return request({
     url: '/oms/order/' + id,
     method: 'delete'
+  })
+}
+
+const downloadFile = function(url) {
+  return request({
+    url,
+    method: 'get',
+    responseType: 'blob'
+  }).then(data => {
+    const URL = window.URL.createObjectURL(data)
+    const tempLink = document.createElement('a')
+    tempLink.style.display = 'none'
+    tempLink.href = URL
+    tempLink.setAttribute('download', '订单.xlsx')
+    if (typeof tempLink.download === 'undefined') {
+      tempLink.setAttribute('target', '_blank')
+    }
+    document.body.appendChild(tempLink)
+    tempLink.click()
+    document.body.removeChild(tempLink)
+    window.URL.revokeObjectURL(URL)
   })
 }

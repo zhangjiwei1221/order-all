@@ -75,6 +75,13 @@
             @click="handleDelete(scope.row)"
           >删除
           </el-button>
+          <el-button
+            size="mini"
+            type="text"
+            icon="el-icon-download"
+            @click="handleExport(scope.row)"
+          >导出
+          </el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -89,7 +96,7 @@
 
     <!-- 添加或修改参数配置对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="800px" append-to-body>
-      <el-form ref="form" :model="form" :rules="rules" label-width="80px">
+      <el-form id="order-form" ref="form" :model="form" :rules="rules" label-width="80px">
         <el-form-item label="店名" prop="shopName">
           <el-input v-model="form.shopName" placeholder="请输入店名"/>
         </el-form-item>
@@ -105,8 +112,7 @@
         <div v-if="form.productList">
           <el-table
             :data="JSON.parse(form.productList).productList"
-            style="width: 100%"
-            height="300px" >
+            style="width: 100%">
             <el-table-column
               prop="name"
               label="名称"
@@ -130,6 +136,7 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitForm">确 定</el-button>
+        <el-button type="primary" v-print="'#order-form'">打印</el-button>
         <el-button @click="cancel">取 消</el-button>
       </div>
     </el-dialog>
@@ -140,6 +147,7 @@
 import {
   addOrder,
   delOrder,
+  exportOrder,
   getOrder,
   listOrder,
   updateOrder
@@ -274,7 +282,7 @@ export default {
     submitForm: function () {
       this.$refs["form"].validate(valid => {
         if (valid) {
-          if (this.form.id != undefined) {
+          if (this.form.id) {
             updateOrder(this.form).then(response => {
               this.msgSuccess("修改成功");
               this.open = false;
@@ -304,6 +312,9 @@ export default {
         this.msgSuccess("删除成功");
       }).catch(() => {
       });
+    },
+    handleExport(row) {
+      exportOrder(row.id);
     }
   }
 };
